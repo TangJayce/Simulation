@@ -1,0 +1,7 @@
+# Simulation
+自己撸的天体运动模拟动画 Processing in IDEA
+
+HelloWorld包下的程序不用理会，就是测试敲的代码
+主程序在Processing包下的CelestialMotionSimulation类中，继承于PApplet类
+
+PApplet类在peocessing软件的bin目录下的core.jar中，请自行下载和导入
