@@ -1,5 +1,7 @@
 package Processing;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PVector;
@@ -14,7 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class CelestialMotionSimulation extends PApplet {
 
     private static final float G = 0.5f;                    //万有引力常数  应该为6.67259*10^(-11) N·m²/kg²  由于这个程序没有单位，所以随便写了
-    private CopyOnWriteArrayList<Body> planets = new CopyOnWriteArrayList<>();
+    private CopyOnWriteArrayList<Body> planets = new CopyOnWriteArrayList<>();  //存放天体的并发容器
     //private Body star;
     private static int starsCount = 500;                            //行星数量
     private PVector planetsMass = new PVector(100,500);      //行星质量区间
@@ -27,6 +29,10 @@ public class CelestialMotionSimulation extends PApplet {
     private static boolean conversionLens = false;                  //镜头是否跟随最大天体  默认为不跟随
     private static boolean is_ShowPath = true;                      //是否显示运行轨迹      默认为显示
     private static PVector lastPosition = new PVector();            //记录镜头最后更新的位置
+    private static Logger log = Logger.getLogger(CelestialMotionSimulation.class);  //调试并打印信息
+    static {
+        PropertyConfigurator.configure("src//log4j.properties"); //配置文件目录
+    }
 
     public static void main(String[] args){
         //PApplet.main("Processing.CelestialMotionSimulation",args);
@@ -38,9 +44,9 @@ public class CelestialMotionSimulation extends PApplet {
      * 获取参数信息
      */
     private void GetParam(){
+        log.info("run method = " + method);
         switch (method) {
             case 1:
-
                 break;
             case 2:
                 planetsMass = selectGUI.mass;
@@ -52,11 +58,11 @@ public class CelestialMotionSimulation extends PApplet {
                     planets.add(b);
                 }
                 else
-                    System.out.println("未加入中央天体");
+                    log.info("未加入中央天体");
                 break;
             default:
                 noLoop();
-                System.out.println("error1");
+                log.error("method error1");
         }
     }
 
@@ -64,7 +70,6 @@ public class CelestialMotionSimulation extends PApplet {
      * 运行动画
      */
     static void Run(){
-        System.out.println("method = "+method);
         String[] processingArgs = {"CelestialMotionSimulation"};
         CelestialMotionSimulation celestialMotionSimulation = new CelestialMotionSimulation();
         PApplet.runSketch(processingArgs, celestialMotionSimulation);
@@ -117,7 +122,7 @@ public class CelestialMotionSimulation extends PApplet {
                 break;
             default:
                 noLoop();
-                System.out.println("error2");
+                log.error("method error2");
         }
     }
 

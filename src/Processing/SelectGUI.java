@@ -306,42 +306,33 @@ class SelectGUI {
      * 获取文本信息  转化为参数
      */
     private void GetParam(){
-        switch (CelestialMotionSimulation.method){
-            case 1:
-                System.out.println("run method = " + CelestialMotionSimulation.method);
-                break;
-            case 2:
-                System.out.println("run method = " + CelestialMotionSimulation.method);
-                float Mx,My,Vx,Vy;
-                if(planetsNumber.getText().trim().equals("")
-                        || planetsMinMass.getText().trim().equals("")
-                        || planetsMaxMass.getText().trim().equals("")
-                        || planetsMinSpeed.getText().trim().equals("")
-                        || planetsMaxSpeed.getText().trim().equals("")) {
-                    JOptionPane.showMessageDialog(selectForm, "内容不能为空");
+        if (CelestialMotionSimulation.method == 2) {
+            float Mx, My, Vx, Vy;
+            if (planetsNumber.getText().trim().equals("")
+                    || planetsMinMass.getText().trim().equals("")
+                    || planetsMaxMass.getText().trim().equals("")
+                    || planetsMinSpeed.getText().trim().equals("")
+                    || planetsMaxSpeed.getText().trim().equals("")) {
+                JOptionPane.showMessageDialog(selectForm, "内容不能为空");
+                return;
+            } else {
+                try {
+                    this.starsCount = Integer.parseInt(planetsNumber.getText().trim());
+                    Mx = Float.parseFloat(planetsMinMass.getText().trim());
+                    My = Float.parseFloat(planetsMaxMass.getText().trim());
+                    Vx = Float.parseFloat(planetsMinSpeed.getText().trim());
+                    Vy = Float.parseFloat(planetsMaxSpeed.getText().trim());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(selectForm, "只能包含数字");
                     return;
                 }
-                else {
-                    try {
-                        this.starsCount = Integer.parseInt(planetsNumber.getText().trim());
-                        Mx = Float.parseFloat(planetsMinMass.getText().trim());
-                        My = Float.parseFloat(planetsMaxMass.getText().trim());
-                        Vx = Float.parseFloat(planetsMinSpeed.getText().trim());
-                        Vy = Float.parseFloat(planetsMaxSpeed.getText().trim());
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                        JOptionPane.showMessageDialog(selectForm, "只能包含数字");
-                        return;
-                    }
-                    mass = new PVector(Mx,My);
-                    speed = new PVector(Vx,Vy);
-                }
-                if(!yes_Add.isSelected()) {
-                    body = null;
-                }
-                break;
-            default:
-                break;
+                mass = new PVector(Mx, My);
+                speed = new PVector(Vx, Vy);
+            }
+            if (!yes_Add.isSelected()) {
+                body = null;
+            }
         }
         selectForm.setVisible(false);
         CelestialMotionSimulation.Run();

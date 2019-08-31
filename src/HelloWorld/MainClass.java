@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
 public class MainClass {
-    static Logger logger = Logger.getLogger(MainClass.class);
+    private static Logger logger = Logger.getLogger(MainClass.class);
     public static void main(String[] args) throws InterruptedException {
         PropertyConfigurator.configure("E:\\ProgramData\\IdeaProjects\\test\\src\\log4j.properties");
-        logger.setLevel(Level.DEBUG);
+        //logger.setLevel(Level.DEBUG);
         logger.trace("跟踪信息");
         logger.debug("调试信息");
         logger.info("输出信息");
