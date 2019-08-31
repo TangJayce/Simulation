@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry excluding="HelloWorld/" kind="src" path="src"/>
+	<classpathentry kind="src" path="src/HelloWorld"/>
+	<classpathentry kind="lib" path="E:/Program Files/processing-3.5.3-windows64/processing-3.5.3/core/library/core.jar"/>
+	<classpathentry kind="output" path="out/production/test"/>
+</classpath>
